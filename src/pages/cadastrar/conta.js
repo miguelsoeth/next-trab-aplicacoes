@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { setAuthHeader } from '@/utils/authenticate';
+import styles from '@/styles/Conta.module.css';
 
 const AccountsPage = () => {
   const [accounts, setAccounts] = useState([]);
@@ -95,51 +96,59 @@ const AccountsPage = () => {
   };
 
   return (
-    <div>
-      <h1>Accounts</h1>
-
+    <div className={styles.container}>
+      <h1 className={styles.title}>Contas</h1>
+  
       {/* Form to create a new account */}
-      <form onSubmit={(e) => { e.preventDefault(); handleCreateAccount(); }}>
+      <form className={styles.form} onSubmit={(e) => { e.preventDefault(); handleCreateAccount(); }}>
         <input
           type="text"
-          placeholder="Account Description"
+          placeholder="Desc. da conta"
           value={newAccountDescription}
           onChange={(e) => setNewAccountDescription(e.target.value)}
+          className={styles.input}
         />
         <input
           type="text"
-          placeholder="Comments"
+          placeholder="Comentário"
           value={newAccountComment}
           onChange={(e) => setNewAccountComment(e.target.value)}
+          className={styles.input}
         />
-        <button type="submit">Create Account</button>
+        <button type="submit" className={styles.button}>Criar conta</button>
       </form>
-
+  
       {/* List of accounts */}
-      <ul>
+      <ul className={styles.list}>
         {accounts.map(account => (
-          <li key={account._id}>
+          <li key={account._id} className={styles.item}>
             {editMode === account._id ? (
               <>
                 <input
                   type="text"
                   value={editedDescription}
                   onChange={(e) => setEditedDescription(e.target.value)}
+                  className={styles.input}
                 />
                 <input
                   type="text"
                   value={editedComment}
                   onChange={(e) => setEditedComment(e.target.value)}
+                  className={styles.input}
                 />
-                <button onClick={() => handleEditAccount(account)}>Save</button>
-                <button onClick={() => cancelEdit()}>Cancel</button>
+                <button onClick={() => handleEditAccount(account)} className={styles.button}>Salvar</button>
+                <button onClick={() => cancelEdit()} className={styles.button}>Cancelar</button>
               </>
             ) : (
               <>
-                <div>{account.description}</div>
-                <div>{account.comments}</div>
-                <button onClick={() => handleSetEditMode(account)}>Edit</button>
-                <button onClick={() => handleDeleteAccount(account._id)}>Delete</button>
+                <div className={styles.item_content}>
+                  <div>{account.description}</div>
+                  <div>{account.comments}</div>
+                </div>
+                <div>
+                  <button onClick={() => handleSetEditMode(account)} className={styles.button}>Editar</button>
+                  <button onClick={() => handleDeleteAccount(account._id)} className={`${styles.button} ${styles.deleteButton}`}>Deletar</button>
+                </div>
               </>
             )}
           </li>
