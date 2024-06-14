@@ -1,0 +1,65 @@
+.adminContainer {
+    width: 100%;
+    border-radius: 10px;
+    background-color: #0056b3;
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    font-size: 18px;
+    font-weight: bold;    
+    color: white;
+    margin: 0;
+    padding: 0px 20px;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.linksContainer {
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.link {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+.link:hover {
+    background-color: #007bff;
+}
+
+.logout_container {
+    gap: 5px;
+    width: 250px;   
+    display: flex;
+    justify-content: center;
+}
+
+.logout {
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    padding: 4px 8px;
+    color: white;
+    cursor: pointer;
+    background-color: #0056b3;
+    transition: background-color 0.3s ease;
+}
+
+.logout:hover {
+    background-color: #007bff;
+}
+
+.spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
