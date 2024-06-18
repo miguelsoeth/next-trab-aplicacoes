@@ -7,19 +7,24 @@ import { ClipLoader } from 'react-spinners';
 const withAuth = (WrappedComponent) => {
   return (props) => {
     const [loading, setLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(true);
     const router = useRouter();
 
     const verifyToken = async () => {
       //FAKE LOAD TIME
-      await new Promise((resolve) => setTimeout(resolve, 400));
+      await new Promise((resolve) => setTimeout(resolve, 250));
 
       const auth = await checkAuth();
       if (!auth.isValid) {
         localStorage.removeItem('token');
         router.push('/login');
-      } else {
-        setLoading(false);
       }
+
+      if (!auth.isAdmin) {
+        setIsAdmin(false);
+      }
+
+      setLoading(false);
     };
 
     useEffect(() => {
@@ -31,6 +36,14 @@ const withAuth = (WrappedComponent) => {
       return (
         <div style={styles.spinnerContainer}>
           <ClipLoader size={80} />
+        </div>
+      );
+    }
+
+    if (!isAdmin) {
+      return (
+        <div style={styles.spinnerContainer}>
+          <strong>Necessário ser administrador para acessar esse conteúdo!</strong>
         </div>
       );
     }

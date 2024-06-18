@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { setAuthHeader } from '@/utils/authenticate';
-import styles from '@/styles/Conta.module.css';
+import styles from '@/styles/Crud.module.css';
+import withAuth from '@/hoc/withAuth';
 
 const CategoriesPage = () => {
   const [categories, setCategories] = useState([]);
@@ -149,7 +150,7 @@ const CategoriesPage = () => {
                   <div>{account.description}</div>
                   <div>{account.type}</div>
                 </div>
-                <div>
+                <div className={styles.manage_buttons}>
                   <button onClick={() => handleSetEditMode(account)} className={styles.button}>Editar</button>
                   <button onClick={() => handleDeleteAccount(account._id)} className={`${styles.button} ${styles.deleteButton}`}>Deletar</button>
                 </div>
@@ -162,4 +163,4 @@ const CategoriesPage = () => {
   );
 };
 
-export default CategoriesPage;
+export default withAuth(CategoriesPage);

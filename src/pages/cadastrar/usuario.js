@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { setAuthHeader } from '@/utils/authenticate';
-import styles from '@/styles/Conta.module.css';
+import styles from '@/styles/Crud.module.css';
+import withAuth from '@/hoc/withAuth';
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
-  const [newUserName, setNewUserName] = useState('');
-  const [newUserEmail, setNewUserEmail] = useState('');
-  const [newUserUser, setNewUserUser] = useState('');
-  const [newUserPwd, setNewUserPwd] = useState('');
-  const [newUserLevel, setNewUserLevel] = useState('');
-  const [newUserStatus, setNewUserStatus] = useState(true);
   const [editMode, setEditMode] = useState(null);
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    user: '',
+    pwd: '',
+    level: '',
+    status: true
+  });  
   const [editedUser, setEditedUser] = useState({
     name: '',
     email: '',
@@ -42,27 +45,29 @@ const UsersPage = () => {
   };
 
   const handleCreateUser = async () => {
-    if (!newUserName || !newUserEmail || !newUserUser || !newUserPwd || !newUserLevel) {
+    if (!newUser.name || !newUser.email || !newUser.user || !newUser.pwd || !newUser.level) {
       alert('Preencha todos os campos para criar um usuário!');
       return;
     }
 
     try {
       await axios.post('http://localhost:8080/api/users/register', {
-        name: newUserName,
-        email: newUserEmail,
-        user: newUserUser,
-        pwd: newUserPwd,
-        level: newUserLevel,
-        status: newUserStatus
+        name: newUser.name,
+        email: newUser.email,
+        user: newUser.user,
+        pwd: newUser.pwd,
+        level: newUser.level,
+        status: newUser.status
       });
       fetchUsers();
-      setNewUserName('');
-      setNewUserEmail('');
-      setNewUserUser('');
-      setNewUserPwd('');
-      setNewUserLevel('');
-      setNewUserStatus(true);
+      setNewUser({
+        name: '',
+        email: '',
+        user: '',
+        pwd: '',
+        level: '',
+        status: true
+      });
     } catch (error) {
       console.error('Error creating user:', error);
     }
@@ -132,34 +137,34 @@ const UsersPage = () => {
         <input
           type="text"
           placeholder="Nome"
-          value={newUserName}
-          onChange={(e) => setNewUserName(e.target.value)}
+          value={newUser.name}
+          onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
           className={styles.input}
         />
         <input
           type="email"
           placeholder="Email"
-          value={newUserEmail}
-          onChange={(e) => setNewUserEmail(e.target.value)}
+          value={newUser.email}
+          onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
           className={styles.input}
         />
         <input
           type="text"
           placeholder="Usuário"
-          value={newUserUser}
-          onChange={(e) => setNewUserUser(e.target.value)}
+          value={newUser.user}
+          onChange={(e) => setNewUser({ ...newUser, user: e.target.value })}
           className={styles.input}
         />
         <input
           type="password"
           placeholder="Senha"
-          value={newUserPwd}
-          onChange={(e) => setNewUserPwd(e.target.value)}
+          value={newUser.pwd}
+          onChange={(e) => setNewUser({ ...newUser, pwd: e.target.value })}
           className={styles.input}
         />
         <select
-          value={newUserLevel}
-          onChange={(e) => setNewUserLevel(e.target.value)}
+          value={newUser.level}
+          onChange={(e) => setNewUser({ ...newUser, level: e.target.value })}
           className={styles.input}
         >
           <option value="">Selecione o nível</option>
@@ -195,6 +200,7 @@ const UsersPage = () => {
                 />
                 <input
                   type="password"
+                  placeholder='Digite a senha desejada'
                   onChange={(e) => setEditedUser({ ...editedUser, pwd: e.target.value })}
                   className={styles.input}
                 />
@@ -212,13 +218,13 @@ const UsersPage = () => {
             ) : (
               <>
                 <div className={styles.item_content}>
-                  <div>{user.name}</div>
-                  <div>{user.email}</div>
-                  <div>{user.user}</div>
-                  <div>{user.level}</div>
-                  <div>{user.status ? 'Ativo' : 'Inativo'}</div>
+                  <div className={styles.item_container}><span>Nome</span>{user.name}</div>
+                  <div className={styles.item_container}><span>Email</span>{user.email}</div>
+                  <div className={styles.item_container}><span>Usuário</span>{user.user}</div>
+                  <div className={styles.item_container}><span>Nivel</span>{user.level}</div>
+                  <div className={styles.item_container}><span>Status</span>{user.status ? 'Ativo' : 'Inativo'}</div>
                 </div>
-                <div>
+                <div className={styles.manage_buttons}>
                   <button onClick={() => handleSetEditMode(user)} className={styles.button}>Editar</button>
                   <button onClick={() => handleDeleteUser(user._id)} className={`${styles.button} ${styles.deleteButton}`}>Deletar</button>
                 </div>
@@ -231,4 +237,4 @@ const UsersPage = () => {
   );
 };
 
-export default UsersPage;
+export default withAuth(UsersPage);

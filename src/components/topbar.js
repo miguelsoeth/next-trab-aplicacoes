@@ -38,15 +38,15 @@ const topbar = () => {
                   
             </h1>
             <div className={styles.linksContainer}>
+                <Link href="/cadastrar/usuario" className={styles.link}>
+                    Cadastrar Usuários
+                </Link>
                 <Link href="/cadastrar/categoria" className={styles.link}>
                     Cadastrar Categorias
                 </Link>
                 <Link href="/cadastrar/conta" className={styles.link}>
                     Cadastrar Contas
-                </Link>
-                <Link href="/cadastrar/usuario" className={styles.link}>
-                    Cadastrar Usuários
-                </Link>
+                </Link>           
                 <Link href="/cadastrar/entrada" className={styles.link}>
                     Cadastrar Receitas/Despesas
                 </Link>

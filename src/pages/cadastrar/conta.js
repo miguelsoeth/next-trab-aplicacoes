@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { setAuthHeader } from '@/utils/authenticate';
-import styles from '@/styles/Conta.module.css';
+import styles from '@/styles/Crud.module.css';
+import withAuth from '@/hoc/withAuth';
 
 const AccountsPage = () => {
   const [accounts, setAccounts] = useState([]);
@@ -145,7 +146,7 @@ const AccountsPage = () => {
                   <div>{account.description}</div>
                   <div>{account.comments}</div>
                 </div>
-                <div>
+                <div className={styles.manage_buttons}>
                   <button onClick={() => handleSetEditMode(account)} className={styles.button}>Editar</button>
                   <button onClick={() => handleDeleteAccount(account._id)} className={`${styles.button} ${styles.deleteButton}`}>Deletar</button>
                 </div>
@@ -158,4 +159,4 @@ const AccountsPage = () => {
   );
 };
 
-export default AccountsPage;
+export default withAuth(AccountsPage);

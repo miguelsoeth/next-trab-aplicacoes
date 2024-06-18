@@ -1,10 +1,13 @@
 import axios from 'axios'
+import jwt from 'jsonwebtoken'
 
 export function setAuthHeader(token) {
   axios.defaults.headers.common['Authorization'] = `${token}`
 }
 
 export const checkAuth = async () => {
+  var isAdminUser = true;
+
   if (typeof window === "undefined") {
     return { isValid: false };
   }
@@ -17,12 +20,16 @@ export const checkAuth = async () => {
   try {
     setAuthHeader(token);
     const response = await axios.post('http://localhost:8080/api/auth/validate', '');
-
     if (response.status !== 200) {
       return { isValid: false };
     }
 
-    return { isValid: true };
+    const decodedToken = jwt.decode(token);
+    if (decodedToken.user.level === "User") {
+      isAdminUser = false;
+    }
+
+    return { isValid: true, isAdmin: isAdminUser };
   } catch (error) {
     console.error('Token verification error:', error);
     return { isValid: false };

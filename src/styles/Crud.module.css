@@ -9,6 +9,11 @@
     max-width: 600px;
     margin: 0 auto;
 }
+
+.container_entries {
+    min-width: 800px;
+    max-width: 800px;
+}
   
 .title {
     text-align: center;
@@ -22,10 +27,29 @@
     margin-bottom: 20px;
 }
 
+.form_entry {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.full_width {
+    grid-column: span 3;
+}
+
 .input {
-    padding: 10px;
+    padding: 10px 0px;    
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 100%;
+}
+
+.select {
+    width: 103%;
+}
+
+.input::value {
+    padding-left: 10px;
 }
 
 .button {
@@ -37,6 +61,16 @@
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.manage_buttons {
+    margin-left: auto;
+}
+
+.label {
+    margin-bottom: 5px;
+    display: flex;
+    font-weight: bold;
 }
 
 .deleteButton {
@@ -68,4 +102,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.item_grid_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Adjust the gap between items */
+    width: 100%; /* Make the grid container take the full width */
+}
+
+.item_container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.item_container span {
+    font-weight: bold;
 }
