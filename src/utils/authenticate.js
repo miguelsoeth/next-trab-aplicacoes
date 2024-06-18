@@ -6,7 +6,7 @@ export function setAuthHeader(token) {
 }
 
 export const checkAuth = async () => {
-  var isAdminUser = true;
+  var userObj = null;
 
   if (typeof window === "undefined") {
     return { isValid: false };
@@ -25,11 +25,11 @@ export const checkAuth = async () => {
     }
 
     const decodedToken = jwt.decode(token);
-    if (decodedToken.user.level === "User") {
-      isAdminUser = false;
+    if (decodedToken.user) {
+      userObj = decodedToken.user;
     }
 
-    return { isValid: true, isAdmin: isAdminUser };
+    return { isValid: true, userObj: userObj };
   } catch (error) {
     console.error('Token verification error:', error);
     return { isValid: false };

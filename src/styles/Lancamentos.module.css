@@ -1,0 +1,115 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filterContainer {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.filterContainer label {
+    margin-right: 10px;
+}
+
+.filterContainer select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f4f4f4;
+}
+
+.button {
+    padding: 10px 15px;
+    margin: 0px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.button:disabled {
+    cursor: not-allowed;
+    background-color: #f4f4f4;
+}
+
+.save {
+    background-color: #4caf50;
+    color: white;
+}
+
+.save:hover {
+    background-color: #45a049;
+}
+
+.cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+.cancel:hover {
+    background-color: #e53935;
+}
+
+.editGrid {
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    gap: 10px;
+}
+
+.editGridRow {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.editGridRow > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.editGridRow > div > input {
+    width: 98%;
+}
+
+.editGridRow > div > select {
+    width: 100%;
+}
+
+.editActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}

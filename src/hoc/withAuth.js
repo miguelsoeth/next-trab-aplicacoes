@@ -8,6 +8,7 @@ const withAuth = (WrappedComponent) => {
   return (props) => {
     const [loading, setLoading] = useState(true);
     const [isAdmin, setIsAdmin] = useState(true);
+    const [isActive, setIsActive] = useState(true);
     const router = useRouter();
 
     const verifyToken = async () => {
@@ -20,8 +21,12 @@ const withAuth = (WrappedComponent) => {
         router.push('/login');
       }
 
-      if (!auth.isAdmin) {
+      if (auth.userObj.level !== "Admin") {
         setIsAdmin(false);
+      }
+
+      if (auth.userObj.status !== true) {
+        setIsActive(false)
       }
 
       setLoading(false);
@@ -43,7 +48,15 @@ const withAuth = (WrappedComponent) => {
     if (!isAdmin) {
       return (
         <div style={styles.spinnerContainer}>
-          <strong>Necessário ser administrador para acessar esse conteúdo!</strong>
+          <strong>Necessário permissões de administrador para acessar esse conteúdo!</strong>
+        </div>
+      );
+    }
+
+    if (!isActive) {
+      return (
+        <div style={styles.spinnerContainer}>
+          <strong>Usuario desativado!</strong>
         </div>
       );
     }

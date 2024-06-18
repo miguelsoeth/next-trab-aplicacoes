@@ -95,7 +95,9 @@ const UsersPage = () => {
       return;
     }
 
-    if (!editedUser.name || !editedUser.email || !editedUser.user || !editedUser.pwd || !editedUser.status) {
+    console.log(editedUser)
+
+    if (!editedUser.name || !editedUser.email || !editedUser.user || !editedUser.pwd) {
       alert('Preencha todos os campos para editar um usuário!');
       return;
     }
@@ -211,6 +213,14 @@ const UsersPage = () => {
                 >
                   <option value="Admin">Admin</option>
                   <option value="User">User</option>
+                </select>
+                <select
+                  value={editedUser.status}
+                  onChange={(e) => setEditedUser({ ...editedUser, status: e.target.value })}
+                  className={styles.input}
+                >
+                  <option value="true">Ativo</option>
+                  <option value="false">Inativo</option>
                 </select>
                 <button onClick={() => handleEditUser()} className={styles.button}>Salvar</button>
                 <button onClick={() => cancelEdit()} className={styles.button}>Cancelar</button>

@@ -185,6 +185,16 @@ const EntriesPage = () => {
     setNewEntry({ ...newEntry, value: value })
   };
 
+  const handleValueChangeEdit = (event) => {
+    let value = event.target.value.replace(/[^\d.]/g, '');
+
+    const regex = /^\d*\.{0,1}\d{0,2}$/;
+    if (!regex.test(value)) {
+      value = editedEntry.value;
+    }
+
+    setEditedEntry({ ...editedEntry, value: value })
+  };
 
   return (
     <div className={styles.container_entries}>
@@ -374,7 +384,7 @@ const EntriesPage = () => {
                     type="text"
                     id="editedentry_value"
                     value={`R$ ${editedEntry.value}`}
-                    onChange={handleValueChange}
+                    onChange={handleValueChangeEdit}
                     className={styles.input}
                   />
                 </div>
