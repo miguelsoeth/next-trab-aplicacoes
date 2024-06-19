@@ -12,9 +12,11 @@ const Clock = () => {
     return () => clearInterval(intervalId); // Cleanup on unmount
   }, []);
 
+  const unixTimestamp = currentTime.getTime() / 1000;
+
   return (
     <strong>
-        <LiveClock date={currentTime} format="HH:mm:ss"/>
+        <LiveClock date={unixTimestamp} format="HH:mm:ss"/>
     </strong>    
   );
 };
