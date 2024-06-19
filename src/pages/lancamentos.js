@@ -165,6 +165,7 @@ const Lancamentos = () => {
       <div className={styles.container}>
         <h1 className={styles.heading}>Lançamentos Financeiros</h1>
         <div className={styles.filterContainer}>
+          <button onClick={openModal} className={styles.button}>Ver Lançamentos</button>  
           <div>
             <label htmlFor="month">Filtrar por mês: </label>
             <select id="month" value={month} onChange={e => setMonth(e.target.value)}>
@@ -190,7 +191,7 @@ const Lancamentos = () => {
               <option value="Receita">Receita</option>
               <option value="Despesa">Despesa</option>
             </select>
-          </div>
+          </div>              
         </div>
         
         <table className={styles.table}>

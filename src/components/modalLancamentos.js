@@ -18,6 +18,14 @@ const ModalLancamentos = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const year = date.getUTCFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <>
       {isOpen && (
@@ -42,7 +50,7 @@ const ModalLancamentos = ({ isOpen, onClose }) => {
                     <td>{lancamento.description}</td>
                     <td>{lancamento.type}</td>
                     <td>{lancamento.value}</td>
-                    <td>{new Date(lancamento.due_date).toLocaleDateString()}</td>
+                    <td>{formatDate(lancamento.due_date)}</td>
                     <td>{lancamento.status}</td>
                   </tr>
                 ))}
@@ -65,7 +73,7 @@ const ModalLancamentos = ({ isOpen, onClose }) => {
                     <td>{lancamento.description}</td>
                     <td>{lancamento.type}</td>
                     <td>{lancamento.value}</td>
-                    <td>{new Date(lancamento.due_date).toLocaleDateString()}</td>
+                    <td>{formatDate(lancamento.due_date)}</td>
                     <td>{lancamento.status}</td>
                   </tr>
                 ))}
