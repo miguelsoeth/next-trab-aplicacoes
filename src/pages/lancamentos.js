@@ -310,7 +310,7 @@ const Lancamentos = () => {
                   <td>{entry.type}</td>
                   <td>{entry.categories}</td>
                   <td>{entry.description}</td>
-                  <td>{entry.value}</td>
+                  <td>{`R$ ${entry.value}`}</td>
                   <td>{formatDate(entry.due_date)}</td>
                   <td>{entry.status}</td>
                   <td>{entry.account}</td>
