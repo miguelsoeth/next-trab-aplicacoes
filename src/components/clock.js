@@ -12,7 +12,7 @@ const Clock = () => {
     return () => clearInterval(intervalId); // Cleanup on unmount
   }, []);
 
-  const unixTimestamp = currentTime.getTime() / 1000;
+  const unixTimestamp = currentTime.getTime();
 
   return (
     <strong>
