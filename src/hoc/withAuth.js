@@ -19,14 +19,14 @@ const withAuth = (WrappedComponent) => {
       if (!auth.isValid) {
         localStorage.removeItem('token');
         router.push('/login');
-      }
+      }     
 
-      if (auth.userObj.level !== "Admin") {
-        setIsAdmin(false);
-      }
-
-      if (auth.userObj.status !== true) {
+      if (auth.isValid && auth.userObj.status !== true) {
         setIsActive(false)
+      }
+
+      if (auth.isValid && auth.userObj.level !== "Admin") {
+        setIsAdmin(false);
       }
 
       setLoading(false);
@@ -45,18 +45,20 @@ const withAuth = (WrappedComponent) => {
       );
     }
 
-    if (!isAdmin) {
-      return (
-        <div style={styles.spinnerContainer}>
-          <strong>Necessário permissões de administrador para acessar esse conteúdo!</strong>
-        </div>
-      );
-    }
+    
 
     if (!isActive) {
       return (
         <div style={styles.spinnerContainer}>
           <strong>Usuario desativado!</strong>
+        </div>
+      );
+    }
+
+    if (!isAdmin) {
+      return (
+        <div style={styles.spinnerContainer}>
+          <strong>Necessário permissões de administrador para acessar esse conteúdo!</strong>
         </div>
       );
     }
