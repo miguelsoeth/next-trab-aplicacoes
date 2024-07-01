@@ -26,7 +26,9 @@ const Lancamentos = () => {
   });
   const filteredEntries = entries.filter(entry => {
     if (!month && !typeFilter) return true;
-    const monthMatches = month ? new Date(entry.due_date).toLocaleString('default', { month: 'long' }) === month : true;
+    let dueDate = new Date(entry.due_date);
+    dueDate.setHours(dueDate.getHours() + 3);
+    const monthMatches = month ? dueDate.toLocaleString('default', { month: 'long' }) === month : true;
     const typeMatches = typeFilter ? entry.type === typeFilter : true;
     return monthMatches && typeMatches;
   });

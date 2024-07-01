@@ -4,15 +4,15 @@ import styles from '@/styles/Crud.module.css';
 
 const AccountForm = ({ onCreate }) => {
   const [description, setDescription] = useState('');
-  const [comment, setComment] = useState('');
+  const [comments, setComment] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!description || !comment) {
+    if (!description || !comments) {
       alert('Preencha todos os campos!');
       return;
     }
-    onCreate({ description, comment });
+    onCreate({ description, comments });
     setDescription('');
     setComment('');
   };
@@ -29,7 +29,7 @@ const AccountForm = ({ onCreate }) => {
       <input
         type="text"
         placeholder="Comentário"
-        value={comment}
+        value={comments}
         onChange={(e) => setComment(e.target.value)}
         className={styles.input}
       />
