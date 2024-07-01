@@ -40,6 +40,7 @@
 .input {
     padding: 10px 0px;    
     border: 1px solid #ccc;
+    background-color: white;
     border-radius: 4px;
     width: 100%;
 }
